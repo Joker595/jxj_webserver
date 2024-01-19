@@ -1,0 +1,43 @@
+---
+Language: Cpp
+BasedOnStyle: Google
+
+UseTab: Never
+IndentWidth: 4
+TabWidth: 4
+AllowAllArgumentsOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
+AlwaysBreakAfterReturnType: TopLevelDefinitions
+AlwaysBreakTemplateDeclarations: Yes
+BinPackArguments: false
+BinPackParameters: false
+ColumnLimit: 100
+DeriveLineEnding: false
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: '^(<|")rsns/'
+    Priority: 2
+    SortPriority: 0
+  - Regex: "^<"
+    Priority: 3
+    SortPriority: 0
+  - Regex: ".*"
+    Priority: 1
+    SortPriority: 0
+KeepEmptyLinesAtTheStartOfBlocks: false
+PointerAlignment: Left
+Standard: "c++17"
+
+---
+Language: Proto
+# # 每行字符的限制，0表示没有限制
+ColumnLimit: 1000
+# 对齐连续的尾随的注释
+AlignTrailingComments:	true
+# 在一个注释中引入换行的penalty
+PenaltyBreakComment:	1000
+# 允许重新排版注释
+ReflowComments:	true
+UseTab: Never
+IndentWidth: 4
+TabWidth: 4
