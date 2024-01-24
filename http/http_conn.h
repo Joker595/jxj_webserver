@@ -88,7 +88,9 @@ class http_conn {
     bool add_blank_line();
 
    public:
+    // 记录epollfd
     static int m_epollfd;
+    // static变量，统计总连接数
     static int m_user_count;
     MYSQL *mysql;
     int m_state;  // 读为0, 写为1

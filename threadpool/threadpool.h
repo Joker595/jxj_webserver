@@ -125,9 +125,11 @@ threadpool<T>::run() {
         m_queuelocker.unlock();
         if (!request) continue;
         if (1 == m_actor_model) {
+            // m_state=0为读
             if (0 == request->m_state) {
                 if (request->read_once()) {
                     request->improv = 1;
+                    // 这里应该是&(request->mysql)
                     connectionRAII mysqlcon(&request->mysql, m_connPool);
                     request->process();
                 } else {
@@ -135,6 +137,7 @@ threadpool<T>::run() {
                     request->timer_flag = 1;
                 }
             } else {
+                // m_state=1为写
                 if (request->write()) {
                     request->improv = 1;
                 } else {

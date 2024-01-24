@@ -52,6 +52,7 @@ class connection_pool {
     int m_close_log;        // 日志开关
 };
 
+// 负责管理和数据库的连接
 class connectionRAII {
    public:
     connectionRAII(MYSQL **con, connection_pool *connPool);
