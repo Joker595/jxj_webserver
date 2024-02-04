@@ -119,11 +119,13 @@ threadpool<T>::run() {
             m_queuelocker.unlock();
             continue;
         }
+        // request是一个http_conn
         T *request = m_workqueue.front();
         m_workqueue.pop_front();
         // 工作队列解锁，任务之间不存在冲突
         m_queuelocker.unlock();
         if (!request) continue;
+        // Reactor模式
         if (1 == m_actor_model) {
             // m_state=0为读
             if (0 == request->m_state) {

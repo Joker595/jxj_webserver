@@ -18,6 +18,7 @@ const char *error_500_form = "There was an unusual problem serving the request f
 locker m_lock;
 map<string, string> users;
 
+// 获取所有的用户名和密码保存在本地
 void
 http_conn::initmysql_result(connection_pool *connPool) {
     // 先从连接池中取一个连接

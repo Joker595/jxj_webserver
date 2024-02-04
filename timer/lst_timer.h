@@ -41,6 +41,7 @@ class util_timer {
     // 使用getconf LONG_BIT命令可以获得time_t(long)的大小（8bytes）
     time_t expire;
 
+    // 赋值为关闭客户连接的操作
     void (*cb_func)(client_data *);
     client_data *user_data;
     util_timer *prev;
