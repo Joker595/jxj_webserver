@@ -422,6 +422,7 @@ WebServer::eventLoop() {
                 dealwithwrite(sockfd);
             }
         }
+        // 定期清理过期的连接
         if (timeout) {
             utils.timer_handler();
 

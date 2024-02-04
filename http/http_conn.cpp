@@ -653,9 +653,11 @@ http_conn::process() {
         modfd(m_epollfd, m_sockfd, EPOLLIN, m_TRIGMode);
         return;
     }
+    // 这里没有真实写，只是准备好了写的内容
     bool write_ret = process_write(read_ret);
     if (!write_ret) {
         close_conn();
     }
+    // 向内核注册，等待什么时候能写了就写进去
     modfd(m_epollfd, m_sockfd, EPOLLOUT, m_TRIGMode);
 }
