@@ -48,8 +48,6 @@ http_conn::initmysql_result(connection_pool *connPool) {
     }
 }
 
-// NOTE: 封装好内核相关操作函数更方便使用
-
 // 对文件描述符设置非阻塞
 int
 setnonblocking(int fd) {
@@ -206,7 +204,7 @@ http_conn::parse_line() {
     return LINE_OPEN;
 }
 
-// 循环读取客户数据，直到无数据可读或对方关闭连接
+// 循环读取客户数据，直到无数据可读或对方关闭连接(仅负责将数据从socket中读出，不参与后续任何处理)
 // NOTE：非阻塞ET工作模式下，需要一次性将数据读完
 bool
 http_conn::read_once() {

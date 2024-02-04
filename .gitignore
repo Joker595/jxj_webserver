@@ -1,0 +1,5 @@
+# 忽略日志文件
+*ServerLog
+
+# 忽略可执行文件
+server
