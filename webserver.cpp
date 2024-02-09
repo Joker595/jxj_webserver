@@ -318,6 +318,7 @@ WebServer::dealwithread(int sockfd) {
         m_pool->append(users + sockfd, 0);
 
         while (true) {
+            // 等待线程池通知：已完成任务
             if (1 == users[sockfd].improv) {
                 if (1 == users[sockfd].timer_flag) {
                     deal_timer(timer, sockfd);

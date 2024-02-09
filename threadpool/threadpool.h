@@ -135,6 +135,7 @@ threadpool<T>::run() {
                     // 猜测是为了等待读取的结果看是否需要关闭连接
                     request->improv = 1;
                     // 这里应该是&(request->mysql)
+                    // NOTE:此处建立了数据库连接
                     connectionRAII mysqlcon(&request->mysql, m_connPool);
                     // 核心处理逻辑
                     request->process();
@@ -151,6 +152,7 @@ threadpool<T>::run() {
                     request->timer_flag = 1;
                 }
             }
+            // Proactor模式
         } else {
             connectionRAII mysqlcon(&request->mysql, m_connPool);
             request->process();

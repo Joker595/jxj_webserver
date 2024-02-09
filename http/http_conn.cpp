@@ -257,6 +257,7 @@ http_conn::parse_request_line(char *text) {
         m_method = GET;
     else if (strcasecmp(method, "POST") == 0) {
         m_method = POST;
+        // POST请求情况下启用CGI
         cgi = 1;
     } else
         return BAD_REQUEST;
@@ -419,12 +420,14 @@ http_conn::do_request() {
                 // 对数据库的操作加锁
                 m_lock.lock();
                 int res = mysql_query(mysql, sql_insert);
+                // 将新注册的用户信息插入数据库
                 users.insert(pair<string, string>(name, password));
                 m_lock.unlock();
 
-                if (!res)
+                if (!res) {
                     strcpy(m_url, "/log.html");
-                else
+                    LOG_DEBUG("execute mysql query: %s", sql_insert);
+                } else
                     strcpy(m_url, "/registerError.html");
             } else
                 strcpy(m_url, "/registerError.html");

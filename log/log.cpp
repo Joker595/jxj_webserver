@@ -159,9 +159,11 @@ Log::write_log(int level, const char *format, ...) {
 
     m_mutex.unlock();
 
+    // 异步写日志
     if (m_is_async && !m_log_queue->full()) {
         m_log_queue->push(log_str);
     } else {
+        // 同步写日志
         m_mutex.lock();
         fputs(log_str.c_str(), m_fp);
         m_mutex.unlock();
